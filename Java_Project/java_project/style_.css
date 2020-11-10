@@ -1,0 +1,140 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.background {
+  background-image: url("./test.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -50px;
+  height: 600px;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #e1e1e1;
+  position: sticky;
+}
+
+a {
+  text-decoration: none;
+  text-emphasis: none;
+  padding: 10px 12px;
+  padding-left: 10px;
+  color: black;
+}
+
+.textbar {
+  display: flex;
+  justify-content: center;
+  margin: 220px auto 0px;
+}
+b {
+  text-decoration: none;
+  color: #ffffff;
+}
+.box {
+  display: flex;
+
+  margin: 20px auto 0px;
+  width: 400px;
+  height: 40px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 3px;
+  text-decoration: none;
+}
+input {
+  width: 10000px;
+}
+
+.wrap {
+  margin-bottom: 20px;
+}
+.bar {
+  display: inline-block;
+  margin-top: 20px;
+}
+.Nationality {
+  background-color: white;
+  margin: 0px 90px;
+  width: 90px;
+}
+.Nationality_bar {
+  margin: 0px;
+  width: 100px;
+  background-color: #f6f6f6;
+}
+
+.Kategorie_bar {
+  margin: 0px auto;
+  width: 100px;
+  background-color: #f6f6f6;
+  text-align: center;
+  list-style: none;
+}
+.menubar {
+  display: flex;
+}
+.kind_bar {
+  margin: 0px;
+  width: 100px;
+  background-color: #f6f6f6;
+  text-align: center;
+  list-style: none;
+}
+.kind_bar.active {
+  margin: 0px;
+  width: 100px;
+  background-color: #f6f6f6;
+  text-align: center;
+  list-style: none;
+  display: flex;
+}
+.Kategorie_bar.active {
+  display: flex;
+}
+.category-toggle,
+.kind-toggle {
+  display: none;
+}
+.category-toggle.show,
+.kind-toggle.show {
+  display: block;
+}
+.menu-category {
+  padding: 0px;
+}
+.menubar_categorytooglebar {
+  padding: 0px;
+}
+ol {
+  padding: 0px 10px;
+}
+input {
+  width: 10px;
+}
+.ad_kind {
+  text-decoration: none;
+}
+.ad {
+  display: flex;
+}
+.file_in {
+  width: 100px;
+}
+
+input[id="image"],
+input[id="video"] {
+  width: 20px;
+  height: 20px;
+}
+li {
+  text-decoration: none;
+}
+.checkbox {
+  padding: 10px;
+}
