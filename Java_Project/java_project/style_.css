@@ -97,9 +97,28 @@ input {
 .Kategorie_bar.active {
   display: flex;
 }
+
 .category-toggle,
 .kind-toggle {
   display: none;
+}
+.menu_kind {
+  position: relative;
+}
+.menu-category {
+  position: relative;
+}
+.category-toggle {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+.kind-toggle {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
 }
 .category-toggle.show,
 .kind-toggle.show {
@@ -140,16 +159,26 @@ li {
 }
 .grid {
   display: grid;
-  max-width: 900px;
+
+  max-width: 1400px;
   width: 100%;
-  margin: 0 auto;
-  background: #ff0;
-  min-height: 400px;
+  margin: 0px auto;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-auto-rows: 20px;
   grid-gap: 5px;
+
+  min-height: 400px;
 }
-item {
-  /* .grid 내부에 들어갈 요소 클래스 값 */
+.item {
   width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.item > img {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
