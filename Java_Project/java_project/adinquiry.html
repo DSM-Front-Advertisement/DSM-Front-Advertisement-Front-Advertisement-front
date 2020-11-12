@@ -20,12 +20,13 @@
       </nav>
       <nav class="checkbox">
       <input type="radio" name="a" id="image" value="image">
-      <label for="image"><em></em>사진 / 동영상</label>
+      <label for="image" ><em></em>사진 / 동영상</label>
       <input type="radio" name="a" id="video" value="video">
       <label for="video"><em></em>사이트</label>
     </nav>
     <form class="Ad_name">
-      <a>제목</a> <input type="text" name="ad_name" value="ad_name">
+      <a>제목</a> <input type="text" name="ad_name" >
+      <a>상세페이지</a> <input type="text" name="ad_sub_link">
     </form>  
     
     <nav class="ad"></nav>
@@ -34,16 +35,16 @@
           <div class="menubar">
             <a style="margin-top: 10px;">카테고리</a>
             <div class="menu-category">
-                <ol style=" width: 100px;"" class="menubar_categorytoogle bar">카테고리▼</ol>
-                <div class="category-toggle">
-                    <li class="Kategorie_bar"><a href="">자동차</a></li>
-                    <li class="Kategorie_bar"><a href="">패션</a></li>
-                    <li class="Kategorie_bar"><a href="">공익</a></li>
-                    <li class="Kategorie_bar"><a href="">장소</a></li>
-                    <li class="Kategorie_bar"><a href="">대회</a></li>
-                    <li class="Kategorie_bar"><a href="">게임</a></li>
-                    <li class="Kategorie_bar"><a href="">전자기기</a></li>
-                </div>
+              <select class="menubar_categorytoggle bar">
+                <option value="category" selected disabled>카테고리▼</option>
+                <option value="car">자동차</option>
+                <option value="car">패션</option>
+                <option value="car">공익</option>
+                <option value="car">장소</option>
+                <option value="car">대회</option>
+                <option value="car">게임</option>
+                <option value="car">전자기기</option>
+              </select>
             </div>
           </div>
       </body>
