@@ -182,3 +182,10 @@ li {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+input[type="text" i] {
+  width: 400px;
+  height: 20px;
+}
+.Ad_name {
+  margin: 10px;
+}
