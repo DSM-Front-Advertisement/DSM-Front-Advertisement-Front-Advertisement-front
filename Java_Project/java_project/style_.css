@@ -187,5 +187,6 @@ input[type="text" i] {
   height: 20px;
 }
 .Ad_name {
-  margin: 10px;
+  margin-left: 0px;
+  margin-bottom: 10px;
 }
