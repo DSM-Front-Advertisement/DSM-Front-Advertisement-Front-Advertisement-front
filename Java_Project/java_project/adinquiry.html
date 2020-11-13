@@ -22,16 +22,22 @@
       <input type="radio" name="a" id="image" value="image">
       <label for="image" ><em></em>사진 / 동영상</label>
       <input type="radio" name="a" id="video" value="video">
-      <label for="video"><em></em>사이트</label>
+      <label for="video"><em></em>링크</label>
     </nav>
     <form class="Ad_name">
       <a>제목</a> <input type="text" name="ad_name" >
       <a>상세페이지</a> <input type="text" name="ad_sub_link">
     </form>  
     
-    <nav class="ad"></nav>
-          <a class="ad_kind">광고</a>
-          <input class="file_in" type="file" name="reviewImg" id="reviewImageFileOpenInput" accept="image/png, image/jpeg">
+    <nav class="file_ad">
+      <a class="ad_kind">광고</a>
+      <input class="file_in" type="file" name="reviewImg" id="reviewImageFileOpenInput" accept="image/png, image/jpeg">
+    </nav>
+    <nav class="link_ad">
+      <a>URL</a> <input type="text" name="URL">
+    </nav>
+    
+          
           <div class="menubar">
             <a style="margin-top: 10px;">카테고리</a>
             <div class="menu-category">
@@ -49,5 +55,5 @@
           </div>
       </body>
 
-      <script src="main.js"></script>
+      <script src="./adinquiry.js"></script>
 </html>

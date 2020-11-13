@@ -162,6 +162,7 @@ li {
 
   max-width: 1400px;
   width: 100%;
+
   margin: 0px auto;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-auto-rows: 20px;
@@ -189,4 +190,16 @@ input[type="text" i] {
 .Ad_name {
   margin-left: 0px;
   margin-bottom: 10px;
+}
+.file_ad {
+  display: none;
+}
+.file_ad.active {
+  display: flex;
+}
+.link_ad {
+  display: none;
+}
+.link_ad.active {
+  display: flex;
 }

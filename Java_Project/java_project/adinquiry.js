@@ -8,16 +8,17 @@ const imgInput = document.getElementById("image");
 const vidInput = document.getElementById("video");
 const file = document.getElementsByClassName("file_ad");
 const link = document.getElementsByClassName("link_ad");
-console.log(1);
-ca_toogleB.addEventListener('click',()=> {
-  toggleCategory[0].classList.toggle("show");
-});
-console.log(2);
-ki_toogleB.addEventListener('click',()=>{
-  toggleKind[0].classList.toggle("show");
-});
 
-
+imgInput.addEventListener('click',()=>
+{
+  Array.from(file)[0].style.display = "block";
+  Array.from(link)[0].style.display = "none";
+});
+vidInput.addEventListener('click',()=>
+{
+  Array.from(file)[0].style.display = "none";
+  Array.from(link)[0].style.display = "block";
+});
 
 
 function SetGridItemHeight(){
