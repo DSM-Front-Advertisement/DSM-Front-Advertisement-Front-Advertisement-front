@@ -6,34 +6,25 @@ const toggleCategory = document.getElementsByClassName("category-toggle");
 const toggleKind = document.getElementsByClassName("kind-toggle");
 const imgInput = document.getElementById("image");
 const vidInput = document.getElementById("video");
-const file = document.getElementsByClassName("file_ad");
-const link = document.getElementsByClassName("link_ad");
+const file = document.getElementById("file_ad");
+const link = document.getElementById("link_ad");
+
+let selectedMediaType = "image";
 
 imgInput.addEventListener("click", () => {
-  Array.from(file)[0].style.display = "block";
-  Array.from(link)[0].style.display = "none";
+  file.style.display = "block";
+  link.style.display = "none";
 });
 vidInput.addEventListener("click", () => {
-  Array.from(file)[0].style.display = "none";
-  Array.from(link)[0].style.display = "block";
+  file.style.display = "none";
+  link.style.display = "block";
 });
 
-function SetGridItemHeight() {
-  let grid = document.getElementsByClassName("grid")[0];
-  let rowHeight = parseInt(
-    window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
-  );
-  let rowGap = parseInt(
-    window.getComputedStyle(grid).getPropertyValue("grid-row-gap")
-  );
+// const testRequest = async () => {
+//   const res = await axios.get(
+//     "https://api.themoviedb.org/4/list/1?page=1&api_key=d00eab0751f997be4f9f7a42dba9ac92&language=ko&sort_by=original_order.asc"
+//   );
+//   console.log(res.data);
+// };
 
-  let item = grid.getElementsByClassName("item");
-  for (let i = 0; i < item.length; ++i) {
-    item[i].style.gridRowEnd = `span ${Math.ceil(
-      item[i].offsetHeight / (rowHeight + rowGap)
-    )}`;
-  }
-}
-
-window.addEventListener("load", SetGridItemHeight);
-window.addEventListener("resize", SetGridItemHeight);
+// testRequest();

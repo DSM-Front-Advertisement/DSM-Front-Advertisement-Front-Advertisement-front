@@ -10,17 +10,24 @@ body {
   height: 600px;
 }
 .navbar {
+  position: sticky;
+  top: 0;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background-color: #e1e1e1;
-  position: sticky;
+}
+.navbar a {
+  display: inline-block;
+  padding: 10px;
+}
+.menu {
+  display: flex;
+  align-items: center;
 }
 
 a {
   text-decoration: none;
-  text-emphasis: none;
-  padding: 10px 12px;
-  padding-left: 10px;
   color: black;
 }
 
@@ -44,11 +51,8 @@ b {
 ul {
   list-style: none;
   margin: 0;
-  padding: 3px;
+  padding: 0;
   text-decoration: none;
-}
-input {
-  width: 10000px;
 }
 
 .wrap {
@@ -186,20 +190,4 @@ li {
 input[type="text" i] {
   width: 400px;
   height: 20px;
-}
-.Ad_name {
-  margin-left: 0px;
-  margin-bottom: 10px;
-}
-.file_ad {
-  display: none;
-}
-.file_ad.active {
-  display: flex;
-}
-.link_ad {
-  display: none;
-}
-.link_ad.active {
-  display: flex;
 }
