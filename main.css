@@ -191,3 +191,7 @@ input[type="text" i] {
   width: 400px;
   height: 20px;
 }
+.search_bar {
+  display: flex;
+  padding-left: 500px;
+}
