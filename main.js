@@ -8,6 +8,7 @@ const imgInput = document.getElementById("image");
 const vidInput = document.getElementById("video");
 const file = document.getElementsByClassName("file_ad");
 const link = document.getElementsByClassName("link_ad");
+const zoomInWrap = document.getElementById("zoomInWrap");
 
 ca_toogleB.addEventListener("click", () => {
   toggleCategory[0].classList.toggle("show");
@@ -33,6 +34,8 @@ function SetGridItemHeight() {
     )}`;
   }
 }
+
+function zoomIn(el) {}
 
 window.addEventListener("load", SetGridItemHeight);
 window.addEventListener("resize", SetGridItemHeight);
