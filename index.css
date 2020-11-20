@@ -30,7 +30,7 @@ input[type="text" i] {
   height: 20px;
 }
 .background {
-  background-image: url("./test.png");
+  background-image: url("./assets/test.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: -50px;
