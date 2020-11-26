@@ -58,53 +58,9 @@
           </div>
         </div>
       </div>
-      <div class="grid">
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple3.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <img src="./assets/apple1.svg" class="item" />
-        <img src="./assets/apple2.svg" class="item" />
-        <iframe
-          class="item"
-          height="315"
-          src="https://www.youtube.com/embed/vNTKdSpIA1k"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <div class="grid" id="grid"></div>
       <div id="zoomWrap">
-        <div id="zoomBack"></div>
+        <div id="zoomBack" onclick="zoomOut()"></div>
         <div id="zoomMain">
           <!-- img -->
           <div id="zoomImageWrap">
@@ -115,7 +71,10 @@
               id="zoomImage"
             />
             <div class="zoomOptions">
-              <p>세부 링크 : <a href="#">http://html.hmtl</a></p>
+              <div>
+                <p>세부 링크</p>
+                <a href="#" id="zoomImageSubLink"></a>
+              </div>
               <button>다운로드</button>
             </div>
           </div>
@@ -123,13 +82,15 @@
           <div id="zoomYoutubeWrap">
             <iframe
               id="zoomYoutube"
-              src="https://www.youtube.com/embed/vNTKdSpIA1k"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
             <div class="zoomOptions">
-              <p>세부 링크 : <a href="#">http://html.hmtl</a></p>
+              <div>
+                <p>세부 링크</p>
+                <a href="#" id="zoomYoutubeSubLink"></a>
+              </div>
               <button>유튜브 링크 복사</button>
             </div>
           </div>
