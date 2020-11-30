@@ -50,3 +50,80 @@ input[type="text" i] {
   display: inline-block;
   padding: 10px;
 }
+.menu {
+  display: flex;
+  align-items: center;
+}
+#title > h1 {
+  margin: 0;
+  padding: 14px;
+  text-align: center;
+  background-color: rgba(77, 77, 77, 0.1);
+  box-sizing: border-box;
+}
+.list {
+  display: flex;
+}
+.itemLeft {
+  width: 80%;
+  border: 1px solid #acacac;
+}
+.dateWrap {
+  padding: 16px;
+  font-size: 22px;
+  color: #acacac;
+}
+.itemWrap {
+  display: flex;
+}
+.item {
+  position: relative;
+  flex: 0 0 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 16px;
+  border: 1px solid #acacac;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.item > img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.item:hover > .hovered {
+  display: flex;
+}
+.hovered {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #e8edf0a8;
+  display: none;
+}
+.hovered > img {
+  width: 50%;
+  height: 50%;
+}
+.itemRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  border: 1px solid #acacac;
+  color: #acacac;
+  font-size: 24px;
+}
+.itemRight > p {
+  cursor: pointer;
+}
+.itemRight > p:hover {
+  color: teal;
+}
