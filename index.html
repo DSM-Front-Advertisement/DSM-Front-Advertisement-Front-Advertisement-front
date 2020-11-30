@@ -32,33 +32,35 @@
       </div>
       <div class="menubar">
         <div class="menu-category">
-          <ol
-            style="color: #7d7d7d; width: 100px"
-            class="menubar_categorytoogle bar"
-          >
+          <ol class="menubar_categorytoogle bar">
             카테고리▼
           </ol>
           <div class="category-toggle">
-            <li class="category_bar"><a href="">자동차</a></li>
-            <li class="category_bar"><a href="">패션</a></li>
-            <li class="category_bar"><a href="">공익</a></li>
-            <li class="category_bar"><a href="">장소</a></li>
-            <li class="category_bar"><a href="">대회</a></li>
-            <li class="category_bar"><a href="">게임</a></li>
-            <li class="category_bar"><a href="">전자기기</a></li>
+            <li class="category_bar">자동차</li>
+            <li class="category_bar">패션</li>
+            <li class="category_bar">공익</li>
+            <li class="category_bar">장소</li>
+            <li class="category_bar">대회</li>
+            <li class="category_bar">게임</li>
+            <li class="category_bar">전자기기</li>
           </div>
         </div>
         <div class="menu_kind">
-          <ol style="color: #7d7d7d" class="menubar_kindbartogle bar">
+          <ol class="menubar_kindbartogle bar">
             이미지/동영상▼
           </ol>
           <div class="kind-toggle">
-            <li class="kind_bar"><a href="">이미지</a></li>
-            <li class="kind_bar"><a href="">영상</a></li>
+            <li class="kind_bar">이미지</li>
+            <li class="kind_bar">영상</li>
           </div>
         </div>
       </div>
-      <div class="grid" id="grid"></div>
+      <div class="grid" id="grid">
+        <div></div>
+      </div>
+      <div id="more">
+        <button id="more-btn">더 보기</button>
+      </div>
       <div id="zoomWrap">
         <div id="zoomBack" onclick="zoomOut()"></div>
         <div id="zoomMain">
@@ -71,9 +73,10 @@
               id="zoomImage"
             />
             <div class="zoomOptions">
-              <div>
-                <p>세부 링크</p>
-                <a href="#" id="zoomImageSubLink"></a>
+              <h1>제목 : <span id="zoomImgTitle">제목 1</span></h1>
+              <div class="links">
+                <span>세부 링크 : </span>
+                <a href="#" target="_blank" id="zoomImageSubLink"></a>
               </div>
               <button>다운로드</button>
             </div>
@@ -87,9 +90,10 @@
               allowfullscreen
             ></iframe>
             <div class="zoomOptions">
-              <div>
-                <p>세부 링크</p>
-                <a href="#" id="zoomYoutubeSubLink"></a>
+              <h1>제목 : <span id="zoomYTTitle">제목 1</span></h1>
+              <div class="links">
+                <span>세부 링크 : </span>
+                <a href="#" target="_blank" id="zoomYoutubeSubLink"></a>
               </div>
               <button>유튜브 링크 복사</button>
             </div>

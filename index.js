@@ -1,82 +1,44 @@
-const BASE_URL = "http://localhost:8080/";
-
-const ca_toggleB = document.querySelector(".menubar_categorytoogle");
-const ki_toggleB = document.querySelector(".menubar_kindbartogle");
-const kat = document.querySelector(".Kategorie_bar");
-const kind = document.querySelector(".kind_bar");
-const toggleCategory = document.getElementsByClassName("category-toggle");
-const toggleKind = document.getElementsByClassName("kind-toggle");
-const imgInput = document.getElementById("image");
-const vidInput = document.getElementById("video");
-const file = document.getElementsByClassName("file_ad");
-const link = document.getElementsByClassName("link_ad");
-const zoomWrap = document.getElementById("zoomWrap");
-const gridWrap = document.getElementById("grid");
-const imageWrap = document.getElementById("zoomImageWrap");
-const youtubeWrap = document.getElementById("zoomYoutubeWrap");
-let page = 0;
-let totalElement = 0;
-let totalPage = 0;
-let advertisements = [];
+const BASE_URL = "http://13.209.255.193:8080/";
+const IMAGE_BASE_URL =
+  "https://s3-1-advertisement.s3.ap-northeast-2.amazonaws.com/";
 
 const apiDefault = axios.create({
   baseURL: BASE_URL,
 });
 
-const initAdvertisements = async () => {
-  const res = await apiDefault.get(`/advertisements?size=5&page=${page}`);
-  console.log(res.data);
-
-  // advertiseResponse: Array(5)
-  //   0:
-  //     advertisementCategoryType: "자동차"
-  //     advertisementId: 1
-  //     advertisementTitle: "제목 1"
-  //     imageId: 1
-  //     mediaType: 0
-  //     subLink: "https://naver.com"
-  //     youtubeLink: ""
-
-  const data = res.data;
-  advertisements = data.advertiseResponse;
-
-  totalElement = res.data.totalElement;
-  totalPage = res.data.totalPage;
-  page += 1;
+const main = {
+  size: 16,
+  page: 0,
+  advertisements: [],
+  searchedList: [],
+  totalPage: 0,
+  totalElement: 0,
 };
 
-// const advertisements = Array(10)
-//   .fill(0)
-//   .map((_, i) => {
-//     if (i % 2) {
-//       // ? image
-//       return {
-//         advertisementId: 1,
-//         advertisementTitle: `제목 ${i + 1}`,
-//         advertisementCategoryType: "과일",
-//         SubLink:
-//           "https://www.kurly.com/shop/goods/goods_search.php?searched=Y&set=ko&sword=%EA%B3%BC%EC%9D%BC&utm_source=1055&utm_medium=2011&utm_term=%EA%B3%BC%EC%9D%BC&utm_content=pc_general&gclid=CjwKCAiA7939BRBMEiwA-hX5J_YIm56XfiemUKBEutYsGNABrdFnl4LXtZo48NbrnTbwV3kW9W8AkhoC0EAQAvD_BwE",
-//         mediaType: 0,
-//         imageId: `./assets/apple${(i % 3) + 1}.svg`,
-//         youtubeLink: "",
-//       };
-//     } else {
-//       // ? youtube
-//       return {
-//         advertisementId: 2,
-//         advertisementTitle: `제목 ${i + 1}`,
-//         advertisementCategoryType: "게임",
-//         SubLink: "https://lol.ps/",
-//         mediaType: 1,
-//         imageId: "",
-//         youtubeLink: "4Sr2E3Jymnc",
-//       };
-//     }
-//   });
+const categoryToggleBar = document.querySelector(".menubar_categorytoogle");
+const kindToggleBar = document.querySelector(".menubar_kindbartogle");
+const toggleKind = document.getElementsByClassName("kind-toggle");
+const toggleCategory = document.getElementsByClassName("category-toggle");
+const zoomWrap = document.getElementById("zoomWrap");
+const moreButton = document.getElementById("more-btn");
+const search = document.querySelector(".search_bar > input");
+
+async function initAdvertisements() {
+  const res = await apiDefault.get(
+    `/advertisements?size=${main.size}&page=${main.page}`
+  );
+
+  const data = res.data;
+  main.advertisements = [...main.advertisements, ...data.advertiseResponse];
+
+  main.totalElement = data.totalElement;
+  main.totalPage = data.totalPage;
+  main.page += 1;
+}
 
 function zoomIn(type, link, subLink) {
-  const imageWrap = zoomWrap.querySelector("#zoomImageWrap");
-  const youtubeWrap = zoomWrap.querySelector("#zoomYoutubeWrap");
+  const imageWrap = document.getElementById("zoomImageWrap");
+  const youtubeWrap = document.getElementById("zoomYoutubeWrap");
 
   zoomWrap.style.display = "block";
 
@@ -86,7 +48,7 @@ function zoomIn(type, link, subLink) {
 
     imageWrap.style.display = "flex";
     youtubeWrap.style.display = "none";
-    image.setAttribute("src", link);
+    image.setAttribute("src", `${IMAGE_BASE_URL}${link}`);
     subLinkWrap.textContent = subLink;
     subLinkWrap.setAttribute("href", subLink);
   } else if (type === "youtube") {
@@ -105,22 +67,32 @@ function zoomOut() {
   zoomWrap.style.display = "none";
 }
 
-function getImageTemplate(ad) {
-  const { advertisementTitle, imageId, SubLink } = ad;
-  const img = `<img src="${imageId}" class="item" title="${advertisementTitle}" onclick="zoomIn('image', '${imageId}', '${SubLink}')" />`;
+function getImageTemplate({ advertisementTitle, imageId, subLink }) {
+  const img = `<div class="item">
+    <div>
+      <img src="${IMAGE_BASE_URL}${imageId}" class="item-img" title="${advertisementTitle}" onclick="zoomIn('image', '${imageId}', '${subLink}')" />
+    </div>
+  </div>`;
 
   return img;
 }
 
-function getYoutubeThumbnailTemplate(ad) {
-  const { advertisementTitle, youtubeLink, SubLink } = ad;
-  const youtube = `<img
-    src="https://img.youtube.com/vi/${youtubeLink}/0.jpg"
-    alt="${advertisementTitle}"
-    title="${advertisementTitle}"
-    class="item"
-    onclick="zoomIn('youtube', '${youtubeLink}', '${SubLink}')"
-  />`;
+function getYoutubeThumbnailTemplate({
+  advertisementTitle,
+  youtubeLink,
+  subLink,
+}) {
+  const youtube = `<div class="item">
+    <div>
+      <img
+        src="https://img.youtube.com/vi/${youtubeLink}/0.jpg"
+        alt="${advertisementTitle}"
+        title="${advertisementTitle}"
+        class="item-img"
+        onclick="zoomIn('youtube', '${youtubeLink}', '${subLink}')"
+      />
+    </div>
+  </div>`;
 
   return youtube;
 }
@@ -139,9 +111,15 @@ function getYoutubeTemplate(youtubeLink) {
 }
 
 function printAdvertisements() {
-  // get ads from the server
+  const gridWrap = document.querySelector("#grid > div");
 
-  for (const ad of advertisements) {
+  for (
+    let i = (main.page - 1) * main.size;
+    i < main.size * main.page && i < main.totalElement;
+    i++
+  ) {
+    const ad = main.advertisements[i];
+
     if (ad.mediaType) {
       // ? youtube
       gridWrap.insertAdjacentHTML("beforeend", getYoutubeThumbnailTemplate(ad));
@@ -152,17 +130,75 @@ function printAdvertisements() {
   }
 }
 
-ca_toggleB.addEventListener("click", () => {
+function printSearchedAdvertisement() {
+  const gridWrap = document.querySelector("#grid > div");
+  gridWrap.innerHTML = "";
+
+  main.searchedList.forEach((el) => {
+    const ad = {
+      advertisementCategoryType: "",
+      advertisementId: el.value,
+      advertisementTitle: el.title,
+      imageId: el.value,
+      mediaType: el.mediaType,
+      subLink: el.subLink,
+      youtubeLink: el.value,
+    };
+
+    if (ad.mediaType) {
+      // ? youtube
+      gridWrap.insertAdjacentHTML("beforeend", getYoutubeThumbnailTemplate(ad));
+    } else {
+      // ? image
+      gridWrap.insertAdjacentHTML("beforeend", getImageTemplate(ad));
+    }
+  });
+}
+
+async function searching(keyword) {
+  const res = await apiDefault.get(`/advertisement?keyword=${keyword}`);
+
+  main.searchedList = res.data;
+
+  console.log(res.data);
+}
+
+async function initialize() {
+  await initAdvertisements();
+
+  if (main.page > main.totalPage) {
+    return alert("불러올 광고가 없습니다.");
+  }
+
+  printAdvertisements();
+}
+
+categoryToggleBar.addEventListener("click", () => {
   toggleCategory[0].classList.toggle("show");
 });
 
-ki_toggleB.addEventListener("click", () => {
+kindToggleBar.addEventListener("click", () => {
   toggleKind[0].classList.toggle("show");
 });
 
-const initialize = async () => {
-  await initAdvertisements();
-  printAdvertisements();
-};
+search.addEventListener("keypress", async (e) => {
+  if (e.key === "Enter") {
+    if (e.target.value.trim() === "") {
+      console.log(1);
+      const gridWrap = document.querySelector("#grid > div");
+      gridWrap.innerHTML = "";
+      printAdvertisements();
+
+      return;
+    }
+    console.log(2);
+    await searching(e.target.value);
+    printSearchedAdvertisement();
+    moreButton.style.display = "none";
+    return;
+  }
+});
+
+moreButton.addEventListener("click", initialize);
 
 window.addEventListener("load", initialize);

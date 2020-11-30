@@ -1,6 +1,6 @@
-body {
-  margin: 0px;
-  padding: 0px;
+* {
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -28,6 +28,12 @@ li {
 input[type="text" i] {
   width: 400px;
   height: 20px;
+}
+h1 {
+  margin: 0;
+}
+button {
+  cursor: pointer;
 }
 .background {
   background-image: url("./assets/test.png");
@@ -90,6 +96,8 @@ input[type="text" i] {
 }
 .menubar {
   display: flex;
+  margin: auto;
+  padding: 0 40px;
 }
 .kind_bar {
   margin: 0px;
@@ -116,8 +124,16 @@ input[type="text" i] {
 .menu_kind {
   position: relative;
 }
+.menu_kind > ol {
+  color: #7d7d7d;
+}
 .menu-category {
   position: relative;
+  padding: 0px;
+}
+.menu-category > ol {
+  color: #7d7d7d;
+  width: 100px;
 }
 .category-toggle {
   position: absolute;
@@ -135,9 +151,6 @@ input[type="text" i] {
 .kind-toggle.show {
   display: block;
 }
-.menu-category {
-  padding: 0px;
-}
 .menubar_categorytooglebar {
   padding: 0px;
 }
@@ -154,28 +167,55 @@ input[type="text" i] {
   padding: 10px;
 }
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  grid-gap: 15px;
+  display: flex;
   width: 100%;
-  max-width: 1400px;
-  min-height: 400px;
-  margin: 0px auto;
+}
+.grid > div {
+  column-width: 250px;
+  column-gap: 20px;
+  margin: 40px;
 }
 .item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  overflow: hidden;
+  display: inline-block;
+  width: 250px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  cursor: pointer;
 }
-
-.item > img {
+.item > div {
   width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+.item > div > img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
 }
 .search_bar {
   display: flex;
-  padding-left: 500px;
+  align-items: center;
+  justify-content: center;
+}
+.search_bar > input {
+  padding: 4px 8px;
+}
+.search_bar > button {
+  display: inline-block;
+  height: 100%;
+  padding: 4px;
+}
+#more {
+  /* width: 1400px; */
+  margin: auto;
+  text-align: center;
+}
+#more > button {
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+  border: 0;
+  font-size: 20px;
 }
 #zoomWrap {
   display: none;
@@ -194,6 +234,8 @@ input[type="text" i] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 20px;
+  padding: 40px;
   background-color: rgb(224, 224, 224);
   z-index: 3;
 }
@@ -225,13 +267,19 @@ input[type="text" i] {
   border: 0;
   padding: 8px 12px;
   background-color: rgb(194, 194, 255);
-  cursor: pointer;
 }
-.zoomOptions a {
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#zoomImageSubLink,
+#zoomYoutubeSubLink {
   display: inline-block;
-  width: 300px;
+  width: 100px;
   text-overflow: ellipsis;
   overflow: hidden;
+  /* vertical-align: middle; */
 }
 #zoomYoutubeWrap {
   display: none;
