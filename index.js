@@ -67,8 +67,13 @@ function zoomOut() {
   zoomWrap.style.display = "none";
 }
 
-function getImageTemplate({ advertisementTitle, imageId, subLink }) {
-  const img = `<div class="item">
+function getImageTemplate({
+  advertisementId,
+  advertisementTitle,
+  imageId,
+  subLink,
+}) {
+  const img = `<div class="item" onClick="recordHistory(${advertisementId})">
     <div>
       <img src="${IMAGE_BASE_URL}${imageId}" class="item-img" title="${advertisementTitle}" onclick="zoomIn('image', '${imageId}', '${subLink}')" />
     </div>
@@ -78,11 +83,12 @@ function getImageTemplate({ advertisementTitle, imageId, subLink }) {
 }
 
 function getYoutubeThumbnailTemplate({
+  advertisementId,
   advertisementTitle,
   youtubeLink,
   subLink,
 }) {
-  const youtube = `<div class="item">
+  const youtube = `<div class="item" onClick="recordHistory(${advertisementId})">
     <div>
       <img
         src="https://img.youtube.com/vi/${youtubeLink}/0.jpg"
@@ -159,8 +165,6 @@ async function searching(keyword) {
   const res = await apiDefault.get(`/advertisement?keyword=${keyword}`);
 
   main.searchedList = res.data;
-
-  console.log(res.data);
 }
 
 async function initialize() {
@@ -171,6 +175,43 @@ async function initialize() {
   }
 
   printAdvertisements();
+}
+
+function getNowForm() {
+  const date = new Date(),
+    y = date.getFullYear(),
+    m = date.getMonth() + 1,
+    d = date.getDate(),
+    form = `${y}-${m > 10 ? m : `0${m}`}-${d}`;
+
+  return form;
+}
+
+function recordHistory(id) {
+  const histories = JSON.parse(localStorage.getItem("histories"));
+  const form = getNowForm();
+  const historyIdx = histories.findIndex((history) => history.date === form);
+
+  if (historyIdx !== -1) {
+    // ? history exist
+    const idIdx = histories[historyIdx].ids.findIndex(
+      (historyId) => historyId === id
+    );
+
+    if (idIdx === -1) {
+      histories[historyIdx].ids.push(id);
+    }
+  } else {
+    // ? history not exist
+    const history = {
+      date: form,
+      ids: [id],
+    };
+
+    histories.push(history);
+  }
+
+  localStorage.setItem("histories", JSON.stringify(histories));
 }
 
 categoryToggleBar.addEventListener("click", () => {
@@ -184,14 +225,11 @@ kindToggleBar.addEventListener("click", () => {
 search.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     if (e.target.value.trim() === "") {
-      console.log(1);
       const gridWrap = document.querySelector("#grid > div");
       gridWrap.innerHTML = "";
       printAdvertisements();
-
       return;
     }
-    console.log(2);
     await searching(e.target.value);
     printSearchedAdvertisement();
     moreButton.style.display = "none";
