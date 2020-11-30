@@ -13,7 +13,9 @@ const histories = JSON.parse(localStorage.getItem("histories"));
 function itemTemplate(ids) {
   let template = "";
 
-  for (let i = 0; i < 3; i++) {
+  console.log(ids.length);
+
+  for (let i = 0; i < 3 && i < ids.length; i++) {
     const item = `<li class="item">
       <img src="${IMAGE_BASE_URL}${ids[i]}" alt="${ids[i]}" title="${ids[i]}" />
       <div class="hovered">

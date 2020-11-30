@@ -78,10 +78,11 @@ input[type="text" i] {
 }
 .item {
   position: relative;
-  flex: 1;
+  flex: 1 1 33%;
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 33%;
   margin: 20px;
   padding: 16px;
   border: 1px solid #acacac;
