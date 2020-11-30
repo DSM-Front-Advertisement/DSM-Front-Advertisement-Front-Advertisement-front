@@ -78,7 +78,7 @@ input[type="text" i] {
 }
 .item {
   position: relative;
-  flex: 0 0 1;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
