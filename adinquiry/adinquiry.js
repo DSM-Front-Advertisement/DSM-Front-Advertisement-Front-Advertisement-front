@@ -1,15 +1,86 @@
-const ca_toogleB = document.querySelector(".menubar_categorytoogle");
-const ki_toogleB = document.querySelector(".menubar_kindbartogle");
-const kat = document.querySelector(".Kategorie_bar");
-const kind = document.querySelector(".kind_bar");
-const toggleCategory = document.getElementsByClassName("category-toggle");
-const toggleKind = document.getElementsByClassName("kind-toggle");
+const BASE_URL = "http://13.209.255.193:8080/";
+
+const apiDefault = axios.create({
+  baseURL: BASE_URL,
+});
+
 const imgInput = document.getElementById("image");
 const vidInput = document.getElementById("video");
 const file = document.getElementById("file_ad");
 const link = document.getElementById("link_ad");
+const imgMedia = document.querySelector(".imgMedia");
+const ytMedia = document.querySelector(".ytMedia");
+const advertisementTitle = document.getElementById("advertisementTitle");
+const subLink = document.getElementById("subLink");
+const youtubeLink = document.getElementById("youtube-link");
+const imageFile = document.getElementById("imageFile");
+const advertisementCategoryType = document.getElementById(
+  "advertisementCategoryType"
+);
+const advertisementFile = document.getElementById("ad_kind");
+const submit = document.getElementById("register");
+const cancel = document.getElementById("cancel");
 
-let selectedMediaType = "image";
+function isWrite(mediaType) {
+  if (advertisementTitle.value.trim() === "") {
+    advertisementTitle.focus();
+    alert("제목을 입력해주세요.");
+    return false;
+  }
+
+  if (subLink.value.trim() === "") {
+    subLink.focus();
+    alert("참고 페이지를 입력해주세요.");
+    return false;
+  }
+
+  if (mediaType === 0 && imageFile.files.length === 0) {
+    // ? image
+    alert("이미지 광고이면 광고 이미지 파일을 선택해주세요.");
+    return false;
+  }
+
+  if (mediaType === 1 && youtubeLink.value.trim() === "") {
+    // ? youtube
+    alert("유튜브 광고이면 유튜브 아이디를 입력해주세요.");
+    return false;
+  }
+
+  if (advertisementCategoryType.value === "category") {
+    advertisementCategoryType.focus();
+    alert("카테고리를 선택해주세요.");
+    return false;
+  }
+
+  return true;
+}
+
+function getFormData(mediaType) {
+  const fd = new FormData();
+  fd.append("mediaType", mediaType);
+  fd.append("advertisementTitle", advertisementTitle.value);
+  fd.append("subLink", subLink.value);
+  fd.append("advertisementCategoryType", advertisementCategoryType.value);
+  fd.append("youtubeLink", youtubeLink.value);
+  fd.append("imageFile", imageFile.files.item(0));
+
+  return fd;
+}
+
+async function write() {
+  const mediaType = +(
+    (ytMedia.checked && ytMedia.value) ||
+    (imgInput.checked && imgInput.value)
+  );
+
+  if (!isWrite(mediaType)) return;
+
+  try {
+    await apiDefault.post("/advertisement", getFormData(mediaType));
+  } catch (err) {
+    console.log("광고 등록에 실패하였습니다. 네트워크를 확인해주세요.");
+  }
+}
 
 imgInput.addEventListener("click", () => {
   file.style.display = "block";
@@ -20,11 +91,8 @@ vidInput.addEventListener("click", () => {
   link.style.display = "block";
 });
 
-// const testRequest = async () => {
-//   const res = await axios.get(
-//     "https://api.themoviedb.org/4/list/1?page=1&api_key=d00eab0751f997be4f9f7a42dba9ac92&language=ko&sort_by=original_order.asc"
-//   );
-//   console.log(res.data);
-// };
+submit.addEventListener("click", write);
 
-// testRequest();
+cancel.addEventListener("click", () => {
+  window.location.replace("/");
+});

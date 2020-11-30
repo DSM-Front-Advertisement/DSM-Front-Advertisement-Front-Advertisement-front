@@ -1,6 +1,6 @@
-body {
-  margin: 0px;
-  padding: 0px;
+* {
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -21,6 +21,16 @@ li {
 input[type="text" i] {
   width: 400px;
   height: 20px;
+}
+.required {
+  position: relative;
+}
+.required::before {
+  content: "*";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  color: red;
 }
 .navbar {
   display: flex;
@@ -58,8 +68,17 @@ input[type="text" i] {
 .menubar {
   padding: 24px 12px;
 }
+#file_ad {
+  display: flex;
+}
+#file_ad > label {
+  width: 100px;
+}
 .menubar {
   display: flex;
+}
+.menubar > label {
+  width: 100px;
 }
 .ad_name_type {
   display: inline-block;
