@@ -15,14 +15,14 @@ const main = {
   totalElement: 0,
 };
 
-const categoryToggleBar = document.querySelector(".menubar_categorytoogle");
-const kindToggleBar = document.querySelector(".menubar_kindbartogle");
-const toggleKind = document.getElementsByClassName("kind-toggle");
-const toggleCategory = document.getElementsByClassName("category-toggle");
+const gridWrap = document.querySelector("#grid > div");
 const zoomWrap = document.getElementById("zoomWrap");
 const moreButton = document.getElementById("more-btn");
 const search = document.querySelector(".search_bar > input");
 const youtubeCopy = document.getElementById("youtubeCopy");
+const result = document.getElementById("result");
+const category = document.getElementById("category");
+const kind = document.getElementById("kind");
 
 async function initAdvertisements() {
   const res = await apiDefault.get(
@@ -116,8 +116,6 @@ function getYoutubeTemplate(youtubeLink) {
 }
 
 function printAdvertisements() {
-  const gridWrap = document.querySelector("#grid > div");
-
   for (
     let i = (main.page - 1) * main.size;
     i < main.size * main.page && i < main.totalElement;
@@ -136,10 +134,8 @@ function printAdvertisements() {
 }
 
 function printSearchedAdvertisement(keyword) {
-  const gridWrap = document.querySelector("#grid > div");
-  const result = document.getElementById("result");
   gridWrap.textContent = "";
-  result.textContent = `'${keyword}'에 대한 검색결과`;
+  result.textContent = `'${keyword}'에 대한 검색 결과`;
 
   main.searchedList.forEach((el) => {
     const ad = {
@@ -160,6 +156,50 @@ function printSearchedAdvertisement(keyword) {
       gridWrap.insertAdjacentHTML("beforeend", getImageTemplate(ad));
     }
   });
+}
+
+function printAdvertisementByCategory(e) {
+  const category = e.target.value;
+
+  gridWrap.textContent = "";
+  result.textContent = `'${category}에 대한 검색 결과'`;
+
+  main.advertisements
+    .filter((ad) => ad.advertisementCategoryType === category)
+    .forEach((ad) => {
+      if (ad.mediaType) {
+        // ? youtube
+        gridWrap.insertAdjacentHTML(
+          "beforeend",
+          getYoutubeThumbnailTemplate(ad)
+        );
+      } else {
+        // ? image
+        gridWrap.insertAdjacentHTML("beforeend", getImageTemplate(ad));
+      }
+    });
+}
+
+function printAdvertisementByMediaType(e) {
+  const mediaType = +e.target.value;
+
+  gridWrap.textContent = "";
+  result.textContent = `'${mediaType}에 대한 검색 결과'`;
+
+  main.advertisements
+    .filter((ad) => ad.mediaType === mediaType)
+    .forEach((ad) => {
+      if (ad.mediaType) {
+        // ? youtube
+        gridWrap.insertAdjacentHTML(
+          "beforeend",
+          getYoutubeThumbnailTemplate(ad)
+        );
+      } else {
+        // ? image
+        gridWrap.insertAdjacentHTML("beforeend", getImageTemplate(ad));
+      }
+    });
 }
 
 async function searching(keyword) {
@@ -225,25 +265,15 @@ function download(e) {
   a.click();
 }
 
-categoryToggleBar.addEventListener("click", () => {
-  toggleCategory[0].classList.toggle("show");
-});
-
-kindToggleBar.addEventListener("click", () => {
-  toggleKind[0].classList.toggle("show");
-});
-
 search.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     if (e.target.value.trim() === "") {
-      const gridWrap = document.querySelector("#grid > div");
       gridWrap.innerHTML = "";
       printAdvertisements();
       return;
     }
     await searching(e.target.value);
     printSearchedAdvertisement(e.target.value);
-    moreButton.style.display = "none";
     return;
   }
 });
@@ -256,6 +286,10 @@ youtubeCopy.addEventListener("click", () => {
   document.execCommand("copy");
   alert("클립보드 복사 완료!");
 });
+
+category.addEventListener("change", printAdvertisementByCategory);
+
+kind.addEventListener("change", printAdvertisementByMediaType);
 
 moreButton.addEventListener("click", initialize);
 

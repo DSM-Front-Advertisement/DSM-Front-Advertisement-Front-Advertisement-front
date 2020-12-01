@@ -31,32 +31,30 @@
         </div>
       </div>
       <div class="menubar">
-        <div class="menu-category">
-          <ol class="menubar_categorytoogle bar">
-            카테고리▼
-          </ol>
-          <div class="category-toggle">
-            <li class="category_bar">자동차</li>
-            <li class="category_bar">패션</li>
-            <li class="category_bar">공익</li>
-            <li class="category_bar">장소</li>
-            <li class="category_bar">대회</li>
-            <li class="category_bar">게임</li>
-            <li class="category_bar">전자기기</li>
-          </div>
+        <div class="menu_category">
+          <select name="category" id="category">
+            <option value="카테고리" selected disabled>카테고리 ▼</option>
+            <option value="자동차">자동차</option>
+            <option value="패션">패션</option>
+            <option value="공익">공익</option>
+            <option value="장소">장소</option>
+            <option value="대회">대회</option>
+            <option value="게임">게임</option>
+            <option value="전자기기">전자기기</option>
+          </select>
         </div>
         <div class="menu_kind">
-          <ol class="menubar_kindbartogle bar">
-            이미지/동영상▼
-          </ol>
-          <div class="kind-toggle">
-            <li class="kind_bar">이미지</li>
-            <li class="kind_bar">영상</li>
-          </div>
+          <select name="kind" id="kind">
+            <option value="카테고리" selected disabled>
+              이미지 / 동영상 ▼
+            </option>
+            <option value="0">이미지</option>
+            <option value="1">동영상</option>
+          </select>
         </div>
       </div>
+      <h1 id="result"></h1>
       <div class="grid" id="grid">
-        <h1 id="result"></h1>
         <div></div>
       </div>
       <div id="more">
@@ -67,12 +65,7 @@
         <div id="zoomMain">
           <!-- img -->
           <div id="zoomImageWrap">
-            <img
-              src="./assets/apple1.svg"
-              alt="advertisement"
-              title="advertisement"
-              id="zoomImage"
-            />
+            <img alt="advertisement" title="advertisement" id="zoomImage" />
             <div class="zoomOptions">
               <h1>제목 : <span id="zoomImgTitle">제목 1</span></h1>
               <div class="links">
