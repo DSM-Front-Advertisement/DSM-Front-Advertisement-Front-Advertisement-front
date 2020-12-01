@@ -56,6 +56,7 @@
         </div>
       </div>
       <div class="grid" id="grid">
+        <h1 id="result"></h1>
         <div></div>
       </div>
       <div id="more">
@@ -78,7 +79,9 @@
                 <span>세부 링크 : </span>
                 <a href="#" target="_blank" id="zoomImageSubLink"></a>
               </div>
-              <button>다운로드</button>
+              <button id="download" data-id="0" onclick="download(event)">
+                다운로드
+              </button>
             </div>
           </div>
           <!-- youtube -->
@@ -95,7 +98,8 @@
                 <span>세부 링크 : </span>
                 <a href="#" target="_blank" id="zoomYoutubeSubLink"></a>
               </div>
-              <button>유튜브 링크 복사</button>
+              <input type="text" id="youtubeLink" />
+              <button id="youtubeCopy">유튜브 링크 복사</button>
             </div>
           </div>
         </div>

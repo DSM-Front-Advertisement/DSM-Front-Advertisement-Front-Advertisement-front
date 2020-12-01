@@ -22,6 +22,7 @@ const toggleCategory = document.getElementsByClassName("category-toggle");
 const zoomWrap = document.getElementById("zoomWrap");
 const moreButton = document.getElementById("more-btn");
 const search = document.querySelector(".search_bar > input");
+const youtubeCopy = document.getElementById("youtubeCopy");
 
 async function initAdvertisements() {
   const res = await apiDefault.get(
@@ -45,21 +46,25 @@ function zoomIn(type, link, subLink) {
   if (type === "image") {
     const image = document.getElementById("zoomImage");
     const subLinkWrap = document.getElementById("zoomImageSubLink");
+    const download = document.getElementById("download");
 
     imageWrap.style.display = "flex";
     youtubeWrap.style.display = "none";
     image.setAttribute("src", `${IMAGE_BASE_URL}${link}`);
     subLinkWrap.textContent = subLink;
     subLinkWrap.setAttribute("href", subLink);
+    download.dataset.id = link;
   } else if (type === "youtube") {
     const youtube = document.getElementById("zoomYoutube");
     const subLinkWrap = document.getElementById("zoomYoutubeSubLink");
+    const youtubeLink = document.getElementById("youtubeLink");
 
     youtubeWrap.style.display = "block";
     imageWrap.style.display = "none";
     youtube.setAttribute("src", `https://www.youtube.com/embed/${link}`);
     subLinkWrap.textContent = subLink;
     subLinkWrap.setAttribute("href", subLink);
+    youtubeLink.value = `https://www.youtube.com/watch?v=${link}`;
   }
 }
 
@@ -67,13 +72,9 @@ function zoomOut() {
   zoomWrap.style.display = "none";
 }
 
-function getImageTemplate({
-  advertisementId,
-  advertisementTitle,
-  imageId,
-  subLink,
-}) {
-  const img = `<div class="item" onClick="recordHistory(${advertisementId})">
+function getImageTemplate(ad) {
+  const { advertisementTitle, imageId, subLink } = ad;
+  const img = `<div class="item" onclick='recordHistory(${JSON.stringify(ad)})'>
     <div>
       <img src="${IMAGE_BASE_URL}${imageId}" class="item-img" title="${advertisementTitle}" onclick="zoomIn('image', '${imageId}', '${subLink}')" />
     </div>
@@ -82,13 +83,11 @@ function getImageTemplate({
   return img;
 }
 
-function getYoutubeThumbnailTemplate({
-  advertisementId,
-  advertisementTitle,
-  youtubeLink,
-  subLink,
-}) {
-  const youtube = `<div class="item" onClick="recordHistory(${advertisementId})">
+function getYoutubeThumbnailTemplate(ad) {
+  const { advertisementTitle, youtubeLink, subLink } = ad;
+  const youtube = `<div class="item" onclick='recordHistory(${JSON.stringify(
+    ad
+  )})'>
     <div>
       <img
         src="https://img.youtube.com/vi/${youtubeLink}/0.jpg"
@@ -136,9 +135,11 @@ function printAdvertisements() {
   }
 }
 
-function printSearchedAdvertisement() {
+function printSearchedAdvertisement(keyword) {
   const gridWrap = document.querySelector("#grid > div");
-  gridWrap.innerHTML = "";
+  const result = document.getElementById("result");
+  gridWrap.textContent = "";
+  result.textContent = `'${keyword}'에 대한 검색결과`;
 
   main.searchedList.forEach((el) => {
     const ad = {
@@ -187,31 +188,41 @@ function getNowForm() {
   return form;
 }
 
-function recordHistory(id) {
+function recordHistory(ad) {
   const histories = JSON.parse(localStorage.getItem("histories"));
   const form = getNowForm();
   const historyIdx = histories.findIndex((history) => history.date === form);
 
   if (historyIdx !== -1) {
     // ? history exist
-    const idIdx = histories[historyIdx].ids.findIndex(
-      (historyId) => historyId === id
+    const idIdx = histories[historyIdx].items.findIndex(
+      (item) => item.advertisementId === ad.advertisementId
     );
 
     if (idIdx === -1) {
-      histories[historyIdx].ids.push(id);
+      histories[historyIdx].items.push(ad);
     }
   } else {
     // ? history not exist
     const history = {
       date: form,
-      ids: [id],
+      items: [ad],
     };
 
     histories.push(history);
   }
 
   localStorage.setItem("histories", JSON.stringify(histories));
+}
+
+function download(e) {
+  const id = e.target.dataset.id;
+  const a = document.createElement("a");
+
+  if (id === "0") return alert("다운로드에 실패헸습니다.");
+
+  a.href = `${IMAGE_BASE_URL}${id}`;
+  a.click();
 }
 
 categoryToggleBar.addEventListener("click", () => {
@@ -231,10 +242,19 @@ search.addEventListener("keypress", async (e) => {
       return;
     }
     await searching(e.target.value);
-    printSearchedAdvertisement();
+    printSearchedAdvertisement(e.target.value);
     moreButton.style.display = "none";
     return;
   }
+});
+
+youtubeCopy.addEventListener("click", () => {
+  const youtubeLink = document.getElementById("youtubeLink");
+
+  youtubeLink.select();
+
+  document.execCommand("copy");
+  alert("클립보드 복사 완료!");
 });
 
 moreButton.addEventListener("click", initialize);

@@ -166,6 +166,9 @@ button {
 .checkbox {
   padding: 10px;
 }
+#result {
+  padding: 20px 40px;
+}
 .grid {
   display: flex;
   width: 100%;
