@@ -65,7 +65,7 @@ input[type="text" i] {
   display: flex;
 }
 .itemLeft {
-  width: 80%;
+  width: 100%;
   border: 1px solid #acacac;
 }
 .dateWrap {
@@ -75,14 +75,16 @@ input[type="text" i] {
 }
 .itemWrap {
   display: flex;
+  overflow-x: scroll;
 }
 .item {
   position: relative;
-  flex: 1 1 33%;
+  flex: 0 0 33%;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 33%;
+  max-height: 250px;
   margin: 20px;
   padding: 16px;
   border: 1px solid #acacac;
@@ -113,18 +115,78 @@ input[type="text" i] {
   width: 50%;
   height: 50%;
 }
-.itemRight {
+#zoomWrap {
+  display: none;
+}
+#zoomBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+#zoomMain {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  padding: 40px;
+  background-color: rgb(224, 224, 224);
+  z-index: 3;
+}
+#zoomImageWrap {
+  display: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 1000px;
+}
+#zoomImage {
+  max-width: 100%;
+  max-height: 100%;
+}
+.zoomOptions {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
-  border: 1px solid #acacac;
-  color: #acacac;
-  font-size: 24px;
+  margin-top: 24px;
+  text-align: center;
+  background-color: rgb(224, 224, 224);
 }
-.itemRight > p {
-  cursor: pointer;
+.zoomOptions > * {
+  margin: 0 12px;
+  font-size: 18px;
 }
-.itemRight > p:hover {
-  color: teal;
+.zoomOptions > button {
+  border: 0;
+  padding: 8px 12px;
+  background-color: rgb(194, 194, 255);
+}
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#zoomImageSubLink,
+#zoomYoutubeSubLink {
+  display: inline-block;
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* vertical-align: middle; */
+}
+#zoomYoutubeWrap {
+  display: none;
+  width: 1000px;
+  height: 700px;
+}
+#zoomYoutube {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 90%;
 }

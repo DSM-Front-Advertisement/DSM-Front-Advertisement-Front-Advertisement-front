@@ -6,6 +6,11 @@
     <title>광고 문의</title>
     <link rel="stylesheet" href="./history.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      rel="shortcut icon"
+      href="../assets/FrontAdvertisementFavicon.ico"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <nav class="navbar">
@@ -19,7 +24,43 @@
       <h1>시청 기록</h1>
     </div>
     <div class="historyListWrap" id="historyListWrap"></div>
-    <div id="test"></div>
+    <div id="zoomWrap">
+      <div id="zoomBack" onclick="zoomOut()"></div>
+      <div id="zoomMain">
+        <!-- img -->
+        <div id="zoomImageWrap">
+          <img alt="advertisement" title="advertisement" id="zoomImage" />
+          <div class="zoomOptions">
+            <h1>제목 : <span id="zoomImgTitle">제목 1</span></h1>
+            <div class="links">
+              <span>세부 링크 : </span>
+              <a href="#" target="_blank" id="zoomImageSubLink"></a>
+            </div>
+            <button id="download" data-id="0" onclick="download(event)">
+              다운로드
+            </button>
+          </div>
+        </div>
+        <!-- youtube -->
+        <div id="zoomYoutubeWrap">
+          <iframe
+            id="zoomYoutube"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          <div class="zoomOptions">
+            <h1>제목 : <span id="zoomYTTitle">제목 1</span></h1>
+            <div class="links">
+              <span>세부 링크 : </span>
+              <a href="#" target="_blank" id="zoomYoutubeSubLink"></a>
+            </div>
+            <input type="text" id="youtubeLink" />
+            <button id="youtubeCopy">유튜브 링크 복사</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="./history.js"></script>
 </html>
