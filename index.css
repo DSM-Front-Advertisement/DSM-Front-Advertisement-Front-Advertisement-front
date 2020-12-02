@@ -63,6 +63,8 @@ button {
   display: flex;
   justify-content: center;
   margin: 220px auto 0px;
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 .box {
   display: flex;
@@ -141,12 +143,15 @@ button {
   justify-content: center;
 }
 .search_bar > input {
-  padding: 4px 8px;
+  width: 500px;
+  padding: 20px;
+  font-size: 24px;
 }
 .search_bar > button {
   display: inline-block;
   height: 100%;
   padding: 4px;
+  font-size: 24px;
 }
 #more {
   /* width: 1400px; */
@@ -195,9 +200,6 @@ button {
   max-height: 100%;
 }
 .zoomOptions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 24px;
   text-align: center;
   background-color: rgb(224, 224, 224);
@@ -217,9 +219,11 @@ button {
   justify-content: center;
 }
 #zoomImageSubLink,
-#zoomYoutubeSubLink {
+#zoomYoutubeSubLink,
+#zoomImgTitle {
   display: inline-block;
-  width: 100px;
+  width: 400px;
+  height: 20px;
   text-overflow: ellipsis;
   overflow: hidden;
   /* vertical-align: middle; */

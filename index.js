@@ -37,10 +37,11 @@ async function initAdvertisements() {
   main.page += 1;
 }
 
-function zoomIn(type, link, subLink) {
+function zoomIn(type, link, subLink, advertisementTitle) {
+  console.log(advertisementTitle);
   const imageWrap = document.getElementById("zoomImageWrap");
   const youtubeWrap = document.getElementById("zoomYoutubeWrap");
-
+  const zoomImgTitle = document.getElementById("zoomImgTitle");
   zoomWrap.style.display = "block";
 
   if (type === "image") {
@@ -54,6 +55,7 @@ function zoomIn(type, link, subLink) {
     subLinkWrap.textContent = subLink;
     subLinkWrap.setAttribute("href", subLink);
     download.dataset.id = link;
+    zoomImgTitle.textContent = advertisementTitle;
   } else if (type === "youtube") {
     const youtube = document.getElementById("zoomYoutube");
     const subLinkWrap = document.getElementById("zoomYoutubeSubLink");
@@ -65,6 +67,7 @@ function zoomIn(type, link, subLink) {
     subLinkWrap.textContent = subLink;
     subLinkWrap.setAttribute("href", subLink);
     youtubeLink.value = `https://www.youtube.com/watch?v=${link}`;
+    zoomImgTitle.textContent = advertisementTitle;
   }
 }
 
@@ -76,7 +79,7 @@ function getImageTemplate(ad) {
   const { advertisementTitle, imageId, subLink } = ad;
   const img = `<div class="item" onclick='recordHistory(${JSON.stringify(ad)})'>
     <div>
-      <img src="${IMAGE_BASE_URL}${imageId}" class="item-img" title="${advertisementTitle}" onclick="zoomIn('image', '${imageId}', '${subLink}')" />
+      <img src="${IMAGE_BASE_URL}${imageId}" class="item-img" title="${advertisementTitle}" onclick="zoomIn('image', '${imageId}', '${subLink}', '${advertisementTitle}')" />
     </div>
   </div>`;
 
@@ -94,7 +97,7 @@ function getYoutubeThumbnailTemplate(ad) {
         alt="${advertisementTitle}"
         title="${advertisementTitle}"
         class="item-img"
-        onclick="zoomIn('youtube', '${youtubeLink}', '${subLink}')"
+        onclick="zoomIn('youtube', '${youtubeLink}', '${subLink}', '${advertisementTitle}')"
       />
     </div>
   </div>`;
@@ -184,7 +187,7 @@ function printAdvertisementByMediaType(e) {
   const mediaType = +e.target.value;
 
   gridWrap.textContent = "";
-  result.textContent = `'${mediaType}에 대한 검색 결과'`;
+  result.textContent = `'${mediaType ? "동영상" : "이미지"}에 대한 검색 결과'`;
 
   main.advertisements
     .filter((ad) => ad.mediaType === mediaType)
