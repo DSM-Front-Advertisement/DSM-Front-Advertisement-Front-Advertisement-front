@@ -78,8 +78,8 @@ async function write() {
   try {
     await apiDefault.post("/advertisement", getFormData(mediaType));
 
-    // alert("광고를 등록했습니다.");
-    // window.location.replace("/");
+    alert("광고를 등록했습니다.");
+    window.location.replace("/");
   } catch (err) {
     console.log("광고 등록에 실패하였습니다. 네트워크를 확인해주세요.");
   }
