@@ -41,13 +41,13 @@ function zoomIn(type, link, subLink, advertisementTitle) {
   console.log(advertisementTitle);
   const imageWrap = document.getElementById("zoomImageWrap");
   const youtubeWrap = document.getElementById("zoomYoutubeWrap");
-  const zoomImgTitle = document.getElementById("zoomImgTitle");
   zoomWrap.style.display = "block";
 
   if (type === "image") {
     const image = document.getElementById("zoomImage");
     const subLinkWrap = document.getElementById("zoomImageSubLink");
     const download = document.getElementById("download");
+    const zoomImgTitle = document.getElementById("zoomImgTitle");
 
     imageWrap.style.display = "flex";
     youtubeWrap.style.display = "none";
@@ -60,6 +60,7 @@ function zoomIn(type, link, subLink, advertisementTitle) {
     const youtube = document.getElementById("zoomYoutube");
     const subLinkWrap = document.getElementById("zoomYoutubeSubLink");
     const youtubeLink = document.getElementById("youtubeLink");
+    const zoomYTTitle = document.getElementById("zoomYTTitle");
 
     youtubeWrap.style.display = "block";
     imageWrap.style.display = "none";
@@ -67,7 +68,7 @@ function zoomIn(type, link, subLink, advertisementTitle) {
     subLinkWrap.textContent = subLink;
     subLinkWrap.setAttribute("href", subLink);
     youtubeLink.value = `https://www.youtube.com/watch?v=${link}`;
-    zoomImgTitle.textContent = advertisementTitle;
+    zoomYTTitle.textContent = advertisementTitle;
   }
 }
 
