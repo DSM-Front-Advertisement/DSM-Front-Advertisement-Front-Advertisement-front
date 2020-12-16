@@ -38,7 +38,6 @@ async function initAdvertisements() {
 }
 
 function zoomIn(type, link, subLink, advertisementTitle) {
-  console.log(advertisementTitle);
   const imageWrap = document.getElementById("zoomImageWrap");
   const youtubeWrap = document.getElementById("zoomYoutubeWrap");
   zoomWrap.style.display = "block";
@@ -233,6 +232,9 @@ function getNowForm() {
 }
 
 function recordHistory(ad) {
+  if (!localStorage.getItem("histories")) {
+    localStorage.setItem("histories", JSON.stringify([]));
+  }
   const histories = JSON.parse(localStorage.getItem("histories"));
   const form = getNowForm();
   const historyIdx = histories.findIndex((history) => history.date === form);

@@ -79,7 +79,7 @@ async function write() {
     await apiDefault.post("/advertisement", getFormData(mediaType));
 
     alert("광고를 등록했습니다.");
-    window.location.replace("/");
+    window.location.replace("/index.html");
   } catch (err) {
     console.log("광고 등록에 실패하였습니다. 네트워크를 확인해주세요.");
   }
@@ -97,5 +97,5 @@ vidInput.addEventListener("click", () => {
 submit.addEventListener("click", write);
 
 cancel.addEventListener("click", () => {
-  window.location.replace("/");
+  window.location.replace("/index.html");
 });
